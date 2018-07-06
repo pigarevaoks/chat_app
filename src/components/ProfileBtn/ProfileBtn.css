@@ -1,0 +1,27 @@
+.button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.image {
+    width: 40px;
+    height: 40px;
+    margin-right: 7px;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+.arrow {
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #898989;
+    display: inline-block;
+}

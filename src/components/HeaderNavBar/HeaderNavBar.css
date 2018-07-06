@@ -1,0 +1,15 @@
+.item {
+    margin-right: 40px;
+    font-size: 15px;
+    text-decoration: none;
+    color: #000000;
+    transition: color 0.4s;
+}
+
+.item:hover {
+    color: #5DCB8E;
+}
+    
+.item:last-child {
+    margin-right: 0;
+}

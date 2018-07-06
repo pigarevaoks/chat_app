@@ -1,0 +1,39 @@
+.container {
+    padding: 17px 0 16px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+
+.inner {
+    width: 1250px;
+    margin: 0 auto;
+    display: table;
+}
+
+.logo {
+    width: 140px;
+    display: table-cell;
+    vertical-align: middle;
+    transition: opacity 0.4s;
+}
+
+.logo:hover {
+    opacity: 0.75;
+}
+
+.image {
+    display: block;
+}
+
+.list {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.profile {
+    width: 57px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+}
