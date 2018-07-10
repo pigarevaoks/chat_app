@@ -4,17 +4,13 @@
     border: none;
     outline: none;
     background: transparent;
-    display: inline-block;
-    vertical-align: middle;
     cursor: pointer;
 }
 
 .image {
-    width: 40px;
-    height: 40px;
+    display: inline-block;
     margin-right: 7px;
     vertical-align: middle;
-    border-radius: 50%;
 }
 
 .arrow {

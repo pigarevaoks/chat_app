@@ -1,0 +1,12 @@
+.container {
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+    /* background-color: aquamarine; */
+    margin-right: 10px;
+}
+
+.inner {
+    height: 52px;
+    /* margin-bottom: 20px; */
+}

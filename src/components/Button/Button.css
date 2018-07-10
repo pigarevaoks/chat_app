@@ -1,0 +1,27 @@
+.button {
+	height: 40px;
+	background-color: #70d19b;
+    color: #fff;
+	border: 2px solid transparent;
+	border-radius: 5px;
+	outline: none;
+	cursor: pointer;
+	font-size: 15px;
+	text-align: center;
+	padding: 0 25px;
+	box-sizing: border-box;
+	transition: border-color, color, opacity 0.4s;
+}
+
+.button:hover {
+	opacity: 0.8;
+}
+
+.button:disabled {
+    background-color: transparent;
+    border-color: #c7c7c7;
+	color: #A6A6A6;
+	cursor: default;
+	opacity: 1;
+}
+

@@ -1,0 +1,26 @@
+.container {
+    display: inline-block;
+    padding: 4px 0;
+    box-sizing: border-box;
+}
+
+.title {
+    font-family: OpenSans;
+    font-size: 12px;   
+    margin-right: 9px;
+}
+
+.red {
+    color: #FF0000;
+}
+
+.grey{
+    color: #C7C7C7;
+}
+
+.btn {
+    display: inline-block;
+    margin-right: 12px;
+    vertical-align: middle;
+    cursor: pointer;
+}

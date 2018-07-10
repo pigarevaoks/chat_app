@@ -1,6 +1,11 @@
 .container {
-    width: 1250px;
+    max-width: 1250px;
+    height: calc(100% - 65px);
     margin: 0 auto;
-    padding-top:  20px;
+    padding:  20px 40px 0;
     box-sizing: border-box;
+}
+
+.tabs {
+    height: 100%;
 }

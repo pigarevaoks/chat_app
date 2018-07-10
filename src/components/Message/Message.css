@@ -1,0 +1,86 @@
+.container {
+    margin-bottom: 15px;
+}
+
+.isSameTime {
+  margin-bottom: 5px;  
+}
+
+.inner {
+    padding-top: 5px;
+    box-sizing: border-box;
+}
+
+.inner::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    position: absolute;
+}
+
+.text {
+    max-width: 85%;
+    display: inline-block;
+    padding: 4px 10px;
+    box-sizing: border-box;
+    border-radius: 13px;
+}
+
+.text_title {
+    font-family: OpenSans;
+    font-size: 14px; 
+    line-height: 20px;
+}
+
+.time {
+    display: inline-block;
+    margin: 0 9px;
+}
+
+.time_title {
+    font-size: 12px;
+    line-height: 28px;
+    color: #C7C7C7;
+}
+
+.sender {
+    text-align: right;
+}
+
+.recipient {
+    position: relative;
+    text-align: left;
+}
+
+.bot {
+    text-align: center;
+}
+.bot .text {
+    padding: 0;
+}
+
+.sender .text {
+    background-color: #5DCB8E;
+    color: #ffffff;  
+    float: right;
+    vertical-align: middle;
+}
+.sender .time::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.recipient .inner {
+    padding-left: 52px;
+}
+
+.recipient .text {
+    background-color: #ffffff; 
+    color: #000000;
+}

@@ -1,0 +1,48 @@
+.container {
+    width: calc(100% - 310px);
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.inner {
+    overflow: scroll;
+    /* height: 500px; */
+    height: calc(100% - 122px);
+}
+
+.connection {
+    text-align: center;
+}
+
+.connection_text {
+    font-family: OpenSans;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.bottom {
+    padding-top: 14px;
+    border-top: 1px solid #C7C7C7;
+    box-sizing: border-box;
+}
+
+.input {
+   width: calc(100% - 140px); 
+}
+
+.button {
+    display: inline-block;
+    margin-left: 9px;
+}
+
+.date {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.date_title {
+    font-size: 14px;
+    color: #898989;
+    line-height: 20px;
+}

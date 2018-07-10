@@ -1,0 +1,24 @@
+.container {
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.small {
+    width: 8px;
+    height: 8px;
+    margin-right: 4px;
+}
+
+.big {
+    width: 11px;
+    height: 11px;
+    margin-right: 9px;
+}
+
+.active {
+    background-color: #5DCB8E;
+}
+
+.disabled {
+    background-color: #EC4245;
+}
