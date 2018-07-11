@@ -1,9 +1,9 @@
 import React from 'react';
 import * as ReactDOM from 'react-dom';
-import { ChatHeader, Message, Button, ChatInput } from 'components';
+import { ChatHeader, Message, Button, ChatInput, MessageDate, MessageBot } from 'components';
 import moment from 'moment';
-import localization from 'moment/locale/ru'
 import styles from './ChatBlock.css';
+import { getRandomInt} from 'utils'
 
 class ChatBlock extends React.Component {
 
@@ -25,58 +25,77 @@ class ChatBlock extends React.Component {
 
     _addMessage = () => {
         const { value, profile, addMessage, onChange } = this.props;
-        const nowDate = moment().format('MM-DD-YYYY');
-        const nowTime = moment().format('HH:MM');
 
         const message = {
-            type: 'person',
+            id: getRandomInt(1, 1000).toString(),
+            type: 'sender',
             text: value,
-            time: nowTime,
-            autor_id: profile.id,
+            date: moment().format('MM-DD-YYYY'),
+            time: moment().format('HH:MM'),
+            author_id: profile.id,
             status: 'sended'
         }
 
-        addMessage(message, nowDate);
+        addMessage(message);
         onChange('');
     }
 
-    _deleteMessage = () => {
-        console.log('DELETE MESSAGE')
+    _deleteMessage = index => {
+        this.props.deleteMessage(index)
     }
 
-    _renderMessages = () => {
+    _resendMessage = index => {
+        this.props.resendMessage(index)
+    }
+
+    _renderLayoutStyles = index => {
         const messages = this.props.chat.messages;
-            return Object.keys(messages).map((key) => {
-                return (
-                    <div key={key}>
-                        <div className={styles.date}>
-                            <span className={styles.date_title}>{moment(key).locale("ru", localization).format('D MMMM')}</span>
-                        </div>
-                        {messages[key].map(
-                            (message, index) => 
-                                <Message 
-                                    key={message.id} 
-                                    message={message} 
-                                    prevMessage={messages[key][index - 1]} 
-                                    nextMessage={messages[key][index + 1]} 
-                                    user={this.props.chat.user}
-                                    deleteMessage={this._deleteMessage}
-                                />
-                        )}
-                    </div>
-                )
-            });
+        const isPersonMessage = ['bot', 'date'].indexOf(messages[index].type) === -1;
+        const prevMsgAuthor = messages[index - 1].author_id;
+        const currMsgAuthor = messages[index].author_id;
+        const nextMsgAuthor = messages[index + 1] ? messages[index + 1].author_id : null;
+        
+        if (!isPersonMessage) { return }
+
+        if (currMsgAuthor !== prevMsgAuthor && currMsgAuthor !== nextMsgAuthor) {
+            return 'alone'
+        } else if (currMsgAuthor !== prevMsgAuthor && currMsgAuthor === nextMsgAuthor) {
+            return 'first'
+        } else if (currMsgAuthor === prevMsgAuthor && currMsgAuthor !== nextMsgAuthor) {
+            return 'last'
+        } else {
+            return 'between'
+        }
     }
 
     render() {
         const { chat, value, onChange } = this.props;
         const isDisabled = value.length === 0;
-
+        
         return(
             <div className={styles.container}>
                 <ChatHeader user={chat.user}/>
                 <div className={styles.inner} ref="messageList" >
-                    {this._renderMessages()}
+                    {chat.messages.map((message, index) => {
+                        const isHidingTime = ['sending', 'failed'].indexOf(chat.messages[index].status) === -1;
+                        const isShowingStatusBar = message.type === 'sender' && message.status !== 'archived';
+                        if (message.type === 'date') {
+                            return <MessageDate key={index} message={message} />
+                        } else if (message.type === 'bot') {
+                            return <MessageBot key={index} message={message} />
+                        } else {
+                            return <Message 
+                                        key={index}
+                                        message={message}
+                                        layout={this._renderLayoutStyles(index)}
+                                        user={chat.user}
+                                        isHidingTime={isHidingTime}
+                                        isShowingStatusBar={isShowingStatusBar}
+                                        resendMessage={() => this._resendMessage(index)}
+                                        deleteMessage={() => this._deleteMessage(index)}
+                                    />
+                        }
+                    })}
                 </div>
                 <div className={styles.bottom}>
                     <ChatInput layout={styles.input} value={value} onChange={onChange} placeholder='Сообщение' />

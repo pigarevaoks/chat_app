@@ -17,7 +17,6 @@
     box-sizing: border-box;
     border-radius: 4px;
     background-color: #fff;
-    border-radius: 13px;
 }
 
 .avatar {
@@ -66,8 +65,9 @@
 
 .sender .info {
     position: absolute;
-    left: auto;
     right: 100%;
+    left: auto;
+    white-space: nowrap;
 }
 
 .sender .time {
@@ -77,41 +77,44 @@
     margin-right: 10px;
 }
 
-
-.isSameTime {
-   margin-bottom: 2px;  
+.first.main {
+    margin-bottom: 5px;
 }
 
-.isSameTime .container {
-    padding-top: 0;
+.between.main {
+    margin-bottom: 5px;
 }
 
-.isSameTime .avatar {
-   bottom: 0;  
+.first .inner {
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
 }
 
-.bot {
-    text-align: center;
-    margin: 15px 0;
+.between .inner {
+    border-radius: 4px;
 }
 
-.bot .container {
-    padding: 0;
-    max-width: 80%;
+.last .inner {
+    border-bottom-left-radius: 13px;
+    border-bottom-right-radius: 13px;
 }
 
-.bot .inner {
-    padding: 0;
-    background-color:transparent;
+.alone .inner {
+    border-radius: 13px;
 }
 
-.bot .text {
-    padding: 0;
+.first .avatar {
+    display: none;
 }
 
-.bot .info {
-    position: absolute;
-    right: auto;
-    left: 100%;
-    top: 0;
+.between .avatar {
+    display: none;
+}
+
+.first .time {
+    display: none;
+}
+
+.between .time {
+    display: none;
 }

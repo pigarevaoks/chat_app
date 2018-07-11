@@ -1,0 +1,10 @@
+.date {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.date_title {
+    font-size: 14px;
+    color: #898989;
+    line-height: 20px;
+}

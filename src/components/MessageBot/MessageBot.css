@@ -1,0 +1,22 @@
+.container {
+    text-align: center;
+    margin: 15px 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.status {
+    margin-right: 10px;
+}
+
+.text {
+    font-family: OpenSans;
+    font-size: 14px; 
+    line-height: 20px;
+}
+
+.time {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #C7C7C7;
+}

@@ -6,6 +6,8 @@ import ChatInput from 'components/ChatInput/ChatInput';
 import ChatList from 'components/ChatList/ChatList';
 import HeaderNavBar from 'components/HeaderNavBar/HeaderNavBar';
 import Message from 'components/Message/Message';
+import MessageBot from 'components/MessageBot/MessageBot';
+import MessageDate from 'components/MessageDate/MessageDate';
 import MessageStatusBar from 'components/MessageStatusBar/MessageStatusBar';
 import ProfileBtn from 'components/ProfileBtn/ProfileBtn';
 import StatusSensor from 'components/StatusSensor/StatusSensor';
@@ -21,6 +23,8 @@ export {
     ChatList,
     HeaderNavBar,
     Message,
+    MessageBot,
+    MessageDate,
     MessageStatusBar,
     ProfileBtn,
     StatusSensor,

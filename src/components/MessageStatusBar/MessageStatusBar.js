@@ -6,34 +6,27 @@ import remove from './images/remove.svg'
 import styles from './MessageStatusBar.css';
 import classNames from 'classnames';
 
-class MessageStatusBar extends React.Component {
-
-    render() {
-        const { status, layout } = this.props;
-        
-        return (
-            <div className={classNames([styles.container, layout])}>
-                {
-                    status === 'read' ? 
-                        <img className={styles.image} src={read} alt="read" /> : 
-                    status === 'sended' ?
-                        <img className={styles.image} src={sended} alt="sended" /> : 
-                    status === 'sending' ?
-                        <span className={classNames([styles.title, styles.grey])}>Отправляется…</span> :
-                    status === 'failed' ? 
-                        <div>
-                            <div className={styles.btn} role="button" onClick={() => console.log('REFRESH')}>
-                                <img className={styles.image} src={refresh} alt="refresh" />
-                            </div>
-                            <div className={styles.btn} role="button" onClick={() => console.log('DELETE')}>
-                                <img className={styles.image} src={remove} alt="remove" />
-                            </div>
-                                <span className={classNames([styles.title, styles.red])}>Не отправлено</span>
-                        </div> : null
-                }
-            </div>
-        );
-    }
-}
+const MessageStatusBar = ({ status, layout, resendMessage, deleteMessage }) => (
+    <div className={classNames([styles.container, layout])}>
+        {
+            status === 'read' ? 
+                <img className={styles.image} src={read} alt="read" /> : 
+            status === 'sended' ?
+                <img className={styles.image} src={sended} alt="sended" /> : 
+            status === 'sending' ?
+                <span className={classNames([styles.title, styles.grey])}>Отправляется…</span> :
+            status === 'failed' ? 
+                <div>
+                    <div className={styles.btn} role="button" onClick={resendMessage}>
+                        <img className={styles.image} src={refresh} alt="refresh" />
+                    </div>
+                    <div className={styles.btn} role="button" onClick={deleteMessage}>
+                        <img className={styles.image} src={remove} alt="remove" />
+                    </div>
+                    <span className={classNames([styles.title, styles.red])}>Не отправлено</span>
+                </div> : null
+        }
+    </div>
+);
 
 export default MessageStatusBar;

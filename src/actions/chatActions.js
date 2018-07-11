@@ -5,12 +5,17 @@ export const change = item => ({
     payload: item
 })
 
-export const addMessage = (message, date) => ({
+export const addMessage = (message) => ({
     type: allActions.ADD_MESSAGE,
-    payload: { message, date }
+    payload: { message }
 });
 
 export const deleteMessage = index => ({
     type: allActions.DELETE_MESSAGE,
+    payload: { index }
+});
+
+export const resendMessage = index => ({
+    type: allActions.RESEND_MESSAGE,
     payload: { index }
 });

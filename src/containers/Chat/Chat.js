@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Tabs, ChatBlock } from 'components';
-import { change, addMessage, deleteMessage } from 'actions/chatActions';
+import { change, addMessage, deleteMessage, resendMessage } from 'actions/chatActions';
 import styles from './Chat.css';
 
 class Chat extends React.Component {
     render() {
-        const { onChange, addMessage, deleteMessage, value, chat, profile } = this.props;
+        const { onChange, addMessage, deleteMessage, resendMessage, value, chat, profile } = this.props;
 
         return (
             <div className={styles.container}>
@@ -18,6 +18,7 @@ class Chat extends React.Component {
                     onChange={onChange}
                     addMessage={addMessage}
                     deleteMessage={deleteMessage}
+                    resendMessage={resendMessage}
                 />
             </div>
         )
@@ -32,7 +33,8 @@ export default connect(
     }),
     dispatch => ({
         onChange: item => dispatch(change(item)),
-        addMessage: (message, date) => dispatch(addMessage(message, date)),
+        addMessage: message => dispatch(addMessage(message)),
         deleteMessage: index => dispatch(deleteMessage(index)),
+        resendMessage: index => dispatch(resendMessage(index)),
     })
 )(Chat);
