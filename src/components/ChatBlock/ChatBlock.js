@@ -7,21 +7,20 @@ import styles from './ChatBlock.css';
 
 class ChatBlock extends React.Component {
 
-    scrollToBottom = () => {
+    componentDidMount() {
+        this._scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this._scrollToBottom();
+    }
+
+    _scrollToBottom = () => {
         const { messageList } = this.refs;
         const scrollHeight = messageList.scrollHeight;
         const height = messageList.clientHeight;
         const maxScrollTop = scrollHeight - height;
         ReactDOM.findDOMNode(messageList).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
-    }
-    
-
-    componentDidMount() {
-        this.scrollToBottom();
-    }
-
-    componentDidUpdate() {
-        this.scrollToBottom();
     }
 
     _addMessage = () => {
@@ -41,6 +40,10 @@ class ChatBlock extends React.Component {
         onChange('');
     }
 
+    _deleteMessage = () => {
+        console.log('DELETE MESSAGE')
+    }
+
     _renderMessages = () => {
         const messages = this.props.chat.messages;
             return Object.keys(messages).map((key) => {
@@ -49,15 +52,24 @@ class ChatBlock extends React.Component {
                         <div className={styles.date}>
                             <span className={styles.date_title}>{moment(key).locale("ru", localization).format('D MMMM')}</span>
                         </div>
-                        
-                        {messages[key].map((message, index) => <Message key={index} message={message} prevMessage={messages[key][index - 1]} user={this.props.chat.user} />)}
+                        {messages[key].map(
+                            (message, index) => 
+                                <Message 
+                                    key={message.id} 
+                                    message={message} 
+                                    prevMessage={messages[key][index - 1]} 
+                                    nextMessage={messages[key][index + 1]} 
+                                    user={this.props.chat.user}
+                                    deleteMessage={this._deleteMessage}
+                                />
+                        )}
                     </div>
                 )
             });
     }
 
     render() {
-        const { chat, value, onChange, deleteMessage } = this.props;
+        const { chat, value, onChange } = this.props;
         const isDisabled = value.length === 0;
 
         return(

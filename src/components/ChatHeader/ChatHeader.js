@@ -13,7 +13,7 @@ const ChatHeader = ({ user }) => (
             </div>
         </div>
         <div className={styles.right_block}>
-            <a className={styles.profile} href="#">Профиль ситтера</a>
+            <a className={styles.profile} href="/">Профиль ситтера</a>
             <div className={styles.star} role='button' onClick={() => console.log('CLICK')}>
                 <img className={styles.image} src={star} alt="logo" />
             </div>
