@@ -5,33 +5,31 @@ import styles from './Message.css';
 
 class Message extends React.Component {
 
-    // componentDidUpdate(prevProps) {
-    //     console.log('prevProps', prevProps.message.text, 'props', this.props.message.text)
-    // }
     render() {
-        const { message, user, prevMessage } = this.props;
+        const { message, user, nextMessage, prevMessage } = this.props;
 
         
         const autorType = message.type === 'bot' ? 'bot' : message.autor_id === user.id ? 'recipient' : 'sender';
         const autorStyle = autorType === 'bot' ? styles.bot : autorType === 'recipient' ? styles.recipient : styles.sender;
         const isFailed = message.status === 'sending' || message.status === 'failed';
-        const isSameTime = prevMessage && message && prevMessage.time === message.time;
-        
-        console.log('isSameTime', isSameTime)
+        const isSameTimePrevMessages = prevMessage && message && prevMessage.time === message.time;
+        const isSameTimeNextMessages = nextMessage && message && nextMessage.time === message.time;
+        const isSameTime = isSameTimeNextMessages || isSameTimePrevMessages;
+        const isShowingStatusBar = autorType === 'sender' && message.status !== 'archived';
+        const isShowingAvatar = autorType === 'recipient' && !isSameTimeNextMessages;
 
         return(
-            <div className={classNames([styles.container, autorStyle, isSameTime ? styles.isSameTime : null])}>
-                {autorType === 'recipient' && !isSameTime && <Avatar layout={styles.avatar} image={user.photo} alt="avatar" />}
-                <div className={styles.inner}>
-                    {autorType === 'bot' && <StatusSensor size='big' status={message.status} />} 
-                    {autorType === 'sender' && <MessageStatusBar status={message.status} />} 
-                    <div className={styles.text}>
-                        <span className={styles.text_title}>{message.text}</span>
+            <div className={classNames([styles.main, autorStyle, isSameTime ? styles.isSameTime : null])}>
+                <div className={styles.container}>
+                    {isShowingAvatar && <Avatar layout={styles.avatar} image={user.photo} alt="avatar" />}
+                    <div className={styles.inner}>
+                        {autorType === 'bot' && <StatusSensor size='big' status={message.status} />} 
+                        <div className={styles.info}>
+                            {isShowingStatusBar && <MessageStatusBar layout={styles.status} status={message.status} />} 
+                            {!isFailed && !isSameTimeNextMessages && <span className={styles.time}>{message.time}</span>}
+                        </div>
+                        <span className={styles.text}>{message.text}</span>
                     </div>
-                    {isFailed ? null :  
-                    <div className={styles.time}>
-                        <span className={styles.time_title}>{message.time}</span>
-                    </div>}
                 </div>
             </div>
         )

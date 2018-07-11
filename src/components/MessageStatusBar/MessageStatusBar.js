@@ -7,11 +7,12 @@ import styles from './MessageStatusBar.css';
 import classNames from 'classnames';
 
 class MessageStatusBar extends React.Component {
+
     render() {
-        const { status } = this.props;
+        const { status, layout } = this.props;
         
         return (
-            <div className={styles.container}>
+            <div className={classNames([styles.container, layout])}>
                 {
                     status === 'read' ? 
                         <img className={styles.image} src={read} alt="read" /> : 
@@ -28,8 +29,7 @@ class MessageStatusBar extends React.Component {
                                 <img className={styles.image} src={remove} alt="remove" />
                             </div>
                                 <span className={classNames([styles.title, styles.red])}>Не отправлено</span>
-                        </div> :
-                    null
+                        </div> : null
                 }
             </div>
         );

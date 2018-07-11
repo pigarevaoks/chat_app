@@ -1,86 +1,117 @@
-.container {
+.main {
     margin-bottom: 15px;
 }
 
-.isSameTime {
-  margin-bottom: 5px;  
-}
-
-.inner {
-    padding-top: 5px;
+.container {
+    max-width: 85%;
+    display: inline-block;
+    position: relative;
+    padding-left: 52px;
     box-sizing: border-box;
 }
 
-.inner::after {
-    content: "";
-    clear: both;
-    display: table;
+.inner {
+    position: relative;
+    display: inline-block;
+    padding: 4px 10px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #fff;
+    border-radius: 13px;
 }
 
 .avatar {
     width: 42px;
     height: 42px;
     position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-bottom: -5px;
+}
+
+.time {
+    position: absolute;
+    left: 100%;
+    margin-left: 10px;
+    font-size: 12px;
+    line-height: 22px;
+    color: #C7C7C7;
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 .text {
-    max-width: 85%;
-    display: inline-block;
-    padding: 4px 10px;
-    box-sizing: border-box;
-    border-radius: 13px;
-}
-
-.text_title {
     font-family: OpenSans;
     font-size: 14px; 
     line-height: 20px;
 }
 
-.time {
-    display: inline-block;
-    margin: 0 9px;
-}
-
-.time_title {
-    font-size: 12px;
-    line-height: 28px;
-    color: #C7C7C7;
+.status {
+    margin-right: 10px;
 }
 
 .sender {
     text-align: right;
 }
 
-.recipient {
-    position: relative;
+.sender .container {
+    padding-left: 0;
     text-align: left;
+}
+
+.sender .inner {
+    background-color: #5DCB8E;
+    color: #ffffff;  
+}
+
+.sender .info {
+    position: absolute;
+    left: auto;
+    right: 100%;
+}
+
+.sender .time {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+
+.isSameTime {
+   margin-bottom: 2px;  
+}
+
+.isSameTime .container {
+    padding-top: 0;
+}
+
+.isSameTime .avatar {
+   bottom: 0;  
 }
 
 .bot {
     text-align: center;
+    margin: 15px 0;
 }
+
+.bot .container {
+    padding: 0;
+    max-width: 80%;
+}
+
+.bot .inner {
+    padding: 0;
+    background-color:transparent;
+}
+
 .bot .text {
     padding: 0;
 }
 
-.sender .text {
-    background-color: #5DCB8E;
-    color: #ffffff;  
-    float: right;
-    vertical-align: middle;
-}
-.sender .time::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.recipient .inner {
-    padding-left: 52px;
-}
-
-.recipient .text {
-    background-color: #ffffff; 
-    color: #000000;
+.bot .info {
+    position: absolute;
+    right: auto;
+    left: 100%;
+    top: 0;
 }

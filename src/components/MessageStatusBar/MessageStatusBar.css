@@ -1,7 +1,5 @@
 .container {
     display: inline-block;
-    padding: 4px 0;
-    box-sizing: border-box;
 }
 
 .title {
