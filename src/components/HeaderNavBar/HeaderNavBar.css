@@ -13,3 +13,12 @@
 .item:last-child {
     margin-right: 0;
 }
+
+@media (max-width:1024px) {
+    .item {
+        display: block;
+        margin-right: 0;
+        padding: 10px 0;
+        box-sizing: border-box;
+    }
+}

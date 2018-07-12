@@ -1,7 +1,6 @@
 .container {
     height: 52px;
     border-bottom: 1px solid #C7C7C7;
-    /* padding-bottom: 16px; */
     box-sizing: border-box;
     position: relative;
 }
@@ -48,4 +47,10 @@
 
 .image {
     vertical-align: middle;
+}
+
+@media (max-width:900px) {
+    .profile {
+        display: none;
+    }
 }

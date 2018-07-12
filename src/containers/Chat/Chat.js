@@ -5,11 +5,12 @@ import { change, addMessage, deleteMessage, resendMessage } from 'actions/chatAc
 import styles from './Chat.css';
 
 class Chat extends React.Component {
+
     render() {
         const { onChange, addMessage, deleteMessage, resendMessage, value, chat, profile } = this.props;
 
         return (
-            <div className={styles.container}>
+            <section className={styles.container}>
                 <Tabs layout={styles.tabs} />
                 <ChatBlock 
                     chat={chat}
@@ -20,7 +21,7 @@ class Chat extends React.Component {
                     deleteMessage={deleteMessage}
                     resendMessage={resendMessage}
                 />
-            </div>
+            </section>
         )
     }
 }

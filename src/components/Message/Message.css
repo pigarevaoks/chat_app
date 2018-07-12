@@ -118,3 +118,30 @@
 .between .time {
     display: none;
 }
+
+@media (max-width:1024px) {
+    .container {
+        max-width: 90%;
+    }
+
+    .info {
+        float: right;
+        display: inline-block;
+    }
+
+    .time {
+        position: static;
+    }
+
+    .sender .info {
+        position: static;
+        /* float: left; */
+    }
+
+    .sender .time {
+        color: #ffffff;
+        opacity: 0.65;
+        margin-right: 0;
+        margin-left: 10px;
+    }
+}

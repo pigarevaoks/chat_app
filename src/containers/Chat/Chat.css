@@ -9,3 +9,9 @@
 .tabs {
     height: 100%;
 }
+
+@media (max-width:1024px) {
+    .container {
+        padding: 10px 10px 0;
+    }
+}

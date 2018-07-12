@@ -21,3 +21,35 @@
     border-top: 5px solid #898989;
     display: inline-block;
 }
+
+.title {
+    display: none;
+    font-size: 15px;
+    color: #000000;
+    padding: 10px 0;
+    transition: color 0.4s;
+}
+
+.title:hover {
+    color: #5DCB8E;
+}
+
+@media (max-width:1024px) {
+    .button {
+        text-align: center;
+        width: 100%;
+    }
+
+    .image {
+        display: none;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .title {
+        display: block;
+        
+    }
+}

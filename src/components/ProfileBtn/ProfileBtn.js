@@ -6,6 +6,7 @@ const ProfileBtn = ({ onClick, image }) => (
     <button type="button" className={styles.button} onClick={onClick}>
         <Avatar layout={styles.image} image={image} alt="logo" />
         <span className={styles.arrow}></span>
+        <span className={styles.title}>Профиль</span>
     </button>
 );
 
