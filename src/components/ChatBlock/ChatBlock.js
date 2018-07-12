@@ -35,7 +35,7 @@ class ChatBlock extends React.Component {
             author_id: profile.id,
             status: 'sended'
         }
-
+        
         addMessage(message);
         onChange('');
     }
@@ -68,13 +68,19 @@ class ChatBlock extends React.Component {
         }
     }
 
+    _handleKeyPress = e => {
+        if (e.key === 'Enter') {
+            this._addMessage()
+        }
+    }
+
     render() {
         const { chat, value, onChange } = this.props;
         const isDisabled = value.length === 0;
         
         return(
             <div className={styles.container}>
-                <ChatHeader user={chat.user}/>
+                <ChatHeader user={chat.user} />
                 <div className={styles.inner} ref="messageList" >
                     {chat.messages.map((message, index) => {
                         const isHidingTime = ['sending', 'failed'].indexOf(chat.messages[index].status) === -1;
@@ -98,8 +104,19 @@ class ChatBlock extends React.Component {
                     })}
                 </div>
                 <div className={styles.bottom}>
-                    <ChatInput layout={styles.input} value={value} onChange={onChange} placeholder='Сообщение' />
-                    <Button title="Отправить" layout={styles.button} onClick={this._addMessage} disabled={isDisabled} />
+                    <ChatInput 
+                        layout={styles.input} 
+                        value={value} 
+                        onChange={onChange} 
+                        onKeyPress={this._handleKeyPress}  
+                        placeholder='Сообщение'
+                    />
+                    <Button 
+                        title="Отправить" 
+                        layout={styles.button} 
+                        onClick={this._addMessage} 
+                        disabled={isDisabled}
+                    />
                 </div>
             </div>
         );
