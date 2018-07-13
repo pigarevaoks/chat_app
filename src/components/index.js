@@ -4,6 +4,7 @@ import ChatBlock from 'components/ChatBlock/ChatBlock';
 import ChatHeader from 'components/ChatHeader/ChatHeader';
 import ChatInput from 'components/ChatInput/ChatInput';
 import ChatList from 'components/ChatList/ChatList';
+import Header from 'components/Header/Header';
 import HeaderNavBar from 'components/HeaderNavBar/HeaderNavBar';
 import Message from 'components/Message/Message';
 import MessageBot from 'components/MessageBot/MessageBot';
@@ -21,6 +22,7 @@ export {
     ChatHeader,
     ChatInput,
     ChatList,
+    Header,
     HeaderNavBar,
     Message,
     MessageBot,

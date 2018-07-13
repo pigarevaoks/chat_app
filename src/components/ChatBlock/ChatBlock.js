@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import * as ReactDOM from 'react-dom';
 import { ChatHeader, Message, Button, ChatInput, MessageDate, MessageBot } from 'components';
 import moment from 'moment';
+import { change, addMessage, deleteMessage, resendMessage, upadateField } from 'actions/chatActions';
 import styles from './ChatBlock.css';
 import { getRandomInt} from 'utils'
 
@@ -9,6 +11,7 @@ class ChatBlock extends React.Component {
 
     componentDidMount() {
         this._scrollToBottom();
+        this._getHeaderAndBottomHeight();
     }
 
     componentDidUpdate() {
@@ -16,11 +19,15 @@ class ChatBlock extends React.Component {
     }
 
     _scrollToBottom = () => {
-        const { messageList } = this.refs;
-        const scrollHeight = messageList.scrollHeight;
-        const height = messageList.clientHeight;
+        const scrollHeight = this.messageList.scrollHeight;
+        const height = this.messageList.clientHeight;
         const maxScrollTop = scrollHeight - height;
-        ReactDOM.findDOMNode(messageList).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+        ReactDOM.findDOMNode(this.messageList).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+    }
+
+    _getHeaderAndBottomHeight = () => {
+        this.props.upadateField('chatHeaderHeight', ReactDOM.findDOMNode(this.chatHeader).offsetHeight);
+        this.props.upadateField('chatBottomHeight', ReactDOM.findDOMNode(this.chatBottom).offsetHeight);
     }
 
     _addMessage = () => {
@@ -40,13 +47,9 @@ class ChatBlock extends React.Component {
         onChange('');
     }
 
-    _deleteMessage = index => {
-        this.props.deleteMessage(index)
-    }
+    _deleteMessage = index => this.props.deleteMessage(index)
 
-    _resendMessage = index => {
-        this.props.resendMessage(index)
-    }
+    _resendMessage = index => this.props.resendMessage(index)
 
     _renderLayoutStyles = index => {
         const messages = this.props.chat.messages;
@@ -69,22 +72,18 @@ class ChatBlock extends React.Component {
     }
 
     _handleKeyPress = e => {
-        if (e.key === 'Enter') {
-            this._addMessage()
-        }
+        if (e.key === 'Enter') { this._addMessage() }
     }
 
     render() {
-        const { chat, value, onChange } = this.props;
+        const { chat, value, onChange, height } = this.props;
         const isDisabled = value.length === 0;
-        
+
         return(
             <div className={styles.container}>
-                <ChatHeader user={chat.user} />
-                <div className={styles.inner} ref="messageList" >
+                <ChatHeader user={chat.user} ref={elem => this.chatHeader = elem} />
+                <div className={styles.inner} ref={elem => this.messageList = elem} style={{ height: height }}>
                     {chat.messages.map((message, index) => {
-                        const isHidingTime = ['sending', 'failed'].indexOf(chat.messages[index].status) === -1;
-                        const isShowingStatusBar = message.type === 'sender' && message.status !== 'archived';
                         if (message.type === 'date') {
                             return <MessageDate key={index} message={message} />
                         } else if (message.type === 'bot') {
@@ -95,15 +94,15 @@ class ChatBlock extends React.Component {
                                         message={message}
                                         layout={this._renderLayoutStyles(index)}
                                         user={chat.user}
-                                        isHidingTime={isHidingTime}
-                                        isShowingStatusBar={isShowingStatusBar}
+                                        isHidingTime={['sending', 'failed'].indexOf(chat.messages[index].status) === -1}
+                                        isShowingStatusBar={message.type === 'sender' && message.status !== 'archived'}
                                         resendMessage={() => this._resendMessage(index)}
                                         deleteMessage={() => this._deleteMessage(index)}
                                     />
                         }
                     })}
                 </div>
-                <div className={styles.bottom}>
+                <div className={styles.bottom} ref={elem => this.chatBottom = elem}>
                     <ChatInput 
                         layout={styles.input} 
                         value={value} 
@@ -123,4 +122,14 @@ class ChatBlock extends React.Component {
     }
 }
 
-export default ChatBlock;
+export default connect(
+    state => ({
+    }),
+    dispatch => ({
+        onChange: item => dispatch(change(item)),
+        addMessage: message => dispatch(addMessage(message)),
+        deleteMessage: index => dispatch(deleteMessage(index)),
+        resendMessage: index => dispatch(resendMessage(index)),
+        upadateField: (field, value) => dispatch(upadateField(field, value)),
+    })
+)(ChatBlock);

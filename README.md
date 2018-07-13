@@ -1,4 +1,6 @@
-## kidsout-test
+# kidsout-chat
+
+Чат с использованием React + Redux
 
 ### Installing
 ```

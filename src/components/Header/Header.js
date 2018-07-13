@@ -1,13 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { HeaderNavBar, ProfileBtn } from 'components';
 import logo from './images/logo.svg'
 import styles from './Header.css';
 
-
 class Header extends React.Component {
+
     render() {
         const { profile } = this.props;
+
         return(
             <div className={styles.container}>
                 <div className={styles.inner}>
@@ -29,9 +29,4 @@ class Header extends React.Component {
     }
 }
 
-export default connect(
-    state => ({
-        profile: state.chat.profile,
-    }),
-    null
-)(Header);
+export default Header;

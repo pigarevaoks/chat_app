@@ -1,13 +1,10 @@
 .container {
-    width: calc(100% - 310px);
     height: 100%;
-    display: inline-block;
-    vertical-align: top;
+    margin-left: 310px;
 }
 
 .inner {
     overflow: scroll;
-    height: calc(100% - 122px);
 }
 
 .connection {
@@ -21,22 +18,18 @@
 }
 
 .bottom {
-    padding-top: 14px;
+    position: relative;
+    padding: 14px 0;
     border-top: 1px solid #C7C7C7;
     box-sizing: border-box;
 }
 
 .input {
-   width: calc(100% - 140px); 
+    margin-right: 140px;
 }
 
 .button {
-    display: inline-block;
-    margin-left: 9px;
-}
-
-@media (max-width:1024px) {
-    .container {
-        width: 100%;
-    }
+    position: absolute;
+    right: 0;
+    top: 14px;
 }

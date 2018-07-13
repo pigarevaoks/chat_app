@@ -2,3 +2,20 @@
     height:100vh;
     background-color: #F6F6F6;
 }
+
+.chat {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding:  0 40px;
+    box-sizing: border-box;
+}
+
+.tabs {
+    height: 100%;
+}
+
+@media (max-width:1024px) {
+    .chat {
+        padding: 0 10px;
+    }
+}

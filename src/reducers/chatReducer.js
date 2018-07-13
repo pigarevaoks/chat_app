@@ -1,9 +1,10 @@
 import initialState from './initialState';
-import { CHANGE_MESSAGE, ADD_MESSAGE, DELETE_MESSAGE, RESEND_MESSAGE } from 'actions/allActions';
+import { CHANGE_MESSAGE, ADD_MESSAGE, DELETE_MESSAGE, RESEND_MESSAGE, UPDATE_FIELD } from 'actions/allActions';
 import { insertMessage, removeMessage, reInsertMessage } from 'utils'
 
 export default function routeEditor(state = initialState, action) {
     switch (action.type) {
+        
         case CHANGE_MESSAGE: 
             return { ...state, inputValue: action.payload };
 
@@ -30,6 +31,12 @@ export default function routeEditor(state = initialState, action) {
                     ...state.chat,
                     messages: reInsertMessage(state.chat.messages, action)
                 }
+            }
+
+        case UPDATE_FIELD: 
+            return {
+                ...state,
+                [action.payload.field]: action.payload.value
             }
 
         default:

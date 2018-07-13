@@ -19,3 +19,9 @@ export const resendMessage = index => ({
     type: allActions.RESEND_MESSAGE,
     payload: { index }
 });
+
+
+export const upadateField = (field, value) => ({
+    type: allActions.UPDATE_FIELD,
+    payload: { field, value }
+});

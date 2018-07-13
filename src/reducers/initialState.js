@@ -1,10 +1,14 @@
 export default {
+    windowHeight: null,
+    headerHeight: null,
+    chatHeaderHeight: null,
+    chatBottomHeight: null,
+    inputValue: '',
     profile: {
         id: '111111',
         name: 'Александр',
         photo: 'http://www.netlore.ru/upload/files/68338/p19d7nh1hm1i37tnuim11ebqo5c1.jpg',
     },
-    inputValue: '',
     chat: {
         user: {
             id: '123456',

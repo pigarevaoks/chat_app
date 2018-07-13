@@ -1,6 +1,3 @@
-.container {
-    display: inline-block;
-}
 .input {
     height: 40px;
     width: 100%;
@@ -9,7 +6,7 @@
     padding: 0 10px;
     box-sizing: border-box;
     font-size: 14px;
-    border-color: all 0.4s;
+    transition: all 0.4s;
 }
 
 .input::-webkit-input-placeholder {

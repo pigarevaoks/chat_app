@@ -1,42 +1,53 @@
 import React from 'react';
-import { Header, HeaderMobile, Chat } from 'containers';
+import { connect } from 'react-redux';
+import * as ReactDOM from 'react-dom';
+import { Header, Tabs, ChatBlock } from 'components';
+import { upadateField } from 'actions/chatActions';
 import styles from './ChatPage.css';
 
 class ChatPage extends React.Component {
-    
-    state = {
-        windowWidth: window.innerWidth,
-        mobileNavVisible: false
-    };
 
     componentDidMount() {
-        window.addEventListener('resize', this.handleResize);
+        this._getWindowAndHeaderHeight();
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.handleResize);
-    }
-
-    handleResize = () => {
-        this.setState({ windowWidth: window.innerWidth });
-    }
-
-    renderHeader = () => {
-        if (this.state.windowWidth <= 1024) {
-            return <HeaderMobile />
-        } else {
-            return <Header />;
-        }
+    _getWindowAndHeaderHeight = () => {
+        this.props.upadateField('windowHeight', window.innerHeight);
+        this.props.upadateField('headerHeight', ReactDOM.findDOMNode(this.header).offsetHeight);
     }
 
     render() {
+        const { value, chat, profile, windowHeight, headerHeight, chatHeaderHeight, chatBottomHeight } = this.props;
+        const height = windowHeight - headerHeight;
+
         return (
-            <div className={styles.container}>
-                {this.renderHeader()}
-                <Chat />
-            </div>
+            <section className={styles.container}>
+                <Header profile={profile} ref={elem => this.header = elem}/>
+                <div className={styles.chat} style={{ height: height }}>
+                    <Tabs layout={styles.tabs} />
+                    <ChatBlock
+                        chat={chat}
+                        value={value}
+                        profile={profile}
+                        height={windowHeight - headerHeight - chatHeaderHeight - chatBottomHeight}
+                    />
+                </div>
+            </section>
         )
     }
 }
 
-export default ChatPage;
+export default connect(
+    state => ({
+        value: state.chat.inputValue,
+        chat: state.chat.chat,
+        profile: state.chat.profile,
+        windowHeight: state.chat.windowHeight,
+        headerHeight: state.chat.headerHeight,
+        chatHeaderHeight: state.chat.chatHeaderHeight,
+        chatBottomHeight: state.chat.chatBottomHeight,
+    }),
+    dispatch => ({
+        upadateField: (field, value) => dispatch(upadateField(field, value)),
+    })
+)(ChatPage);

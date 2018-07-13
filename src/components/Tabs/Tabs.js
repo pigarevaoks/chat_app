@@ -7,31 +7,20 @@ class Tabs extends React.Component {
 
     state = { 
         tabs: [
-            {
-                title: 'Все',
-                content: '1',
-            }, 
-            {
-                title: 'С заказами',
-                content: '2',
-            }, 
-            {
-                title: 'Избранные',
-                content: '3',
-            }],
+            { title: 'Все', content: '1' }, 
+            { title: 'С заказами', content: '2' }, 
+            { title: 'Избранные', content: '3' }
+        ],
         active: 0
     }
 
-    _onTabPress = value => {
-        this.setState({ active: value })
-    }
+    _onTabPress = value =>  this.setState({ active: value })
 
     render() {
         const { tabs, active } = this.state;
-        const { layout } = this.props;
 
         return (
-            <div className={classNames([styles.container, layout])}>
+            <div className={classNames([styles.container, this.props.layout])}>
                 <div className={styles.inner}>
                     {tabs.map((tab, index) => 
                         <TabBtn 

@@ -1,6 +1,7 @@
 .container {
-    height: 52px;
+    height: 72px;
     border-bottom: 1px solid #C7C7C7;
+    padding: 16px 0;
     box-sizing: border-box;
     position: relative;
 }
@@ -21,16 +22,16 @@
 }
 
 .right_block {
-    line-height: 38px;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 2px;
+    top: 28px;
 }
 
 .profile {
     display: inline-block;
     text-decoration: none;
     font-size: 15px;
+    vertical-align: middle;
     color: #1172E0;
     transition: opacity 0.4s;
     margin-right: 25px;
@@ -47,10 +48,4 @@
 
 .image {
     vertical-align: middle;
-}
-
-@media (max-width:900px) {
-    .profile {
-        display: none;
-    }
 }

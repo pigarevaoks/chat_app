@@ -1,5 +1,6 @@
 .container {
-    height: calc(100% - 67px);
+    height: 300px;
+    overflow: scroll;
     background-color: #ffffff;
     padding: 10px;
     box-sizing: border-box;

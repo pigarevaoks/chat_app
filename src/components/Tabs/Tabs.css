@@ -1,16 +1,8 @@
 .container {
     width: 300px;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 10px;
+    float: left;
 }
 
 .inner {
-    height: 52px;
-}
-
-@media (max-width:1024px) {
-    .container {
-        display: none;
-    }
+    margin: 20px 0;
 }
