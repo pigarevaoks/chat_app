@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as ReactDOM from 'react-dom';
+import { findDOMNode } from 'react-dom';
 import { Header, Tabs, ChatBlock } from 'components';
 import { upadateField } from 'actions/chatActions';
 import styles from './ChatPage.css';
@@ -13,17 +13,16 @@ class ChatPage extends React.Component {
 
     _getWindowAndHeaderHeight = () => {
         this.props.upadateField('windowHeight', window.innerHeight);
-        this.props.upadateField('headerHeight', ReactDOM.findDOMNode(this.header).offsetHeight);
+        this.props.upadateField('headerHeight', findDOMNode(this.header).offsetHeight);
     }
 
     render() {
         const { value, chat, profile, windowHeight, headerHeight, chatHeaderHeight, chatBottomHeight } = this.props;
-        const height = windowHeight - headerHeight;
 
         return (
             <section className={styles.container}>
                 <Header profile={profile} ref={elem => this.header = elem}/>
-                <div className={styles.chat} style={{ height: height }}>
+                <div className={styles.chat} style={{ height: windowHeight - headerHeight }}>
                     <Tabs layout={styles.tabs} />
                     <ChatBlock
                         chat={chat}

@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as ReactDOM from 'react-dom';
-import { ChatHeader, Message, Button, ChatInput, MessageDate, MessageBot } from 'components';
+import { findDOMNode } from 'react-dom';
+import { ChatHeader, Message, Button, ChatInput } from 'components';
 import moment from 'moment';
 import { change, addMessage, deleteMessage, resendMessage, upadateField } from 'actions/chatActions';
 import styles from './ChatBlock.css';
-import { getRandomInt} from 'utils'
+import { getRandomInt } from 'utils'
 
 class ChatBlock extends React.Component {
 
@@ -22,12 +22,12 @@ class ChatBlock extends React.Component {
         const scrollHeight = this.messageList.scrollHeight;
         const height = this.messageList.clientHeight;
         const maxScrollTop = scrollHeight - height;
-        ReactDOM.findDOMNode(this.messageList).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+        findDOMNode(this.messageList).scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
     }
 
     _getHeaderAndBottomHeight = () => {
-        this.props.upadateField('chatHeaderHeight', ReactDOM.findDOMNode(this.chatHeader).offsetHeight);
-        this.props.upadateField('chatBottomHeight', ReactDOM.findDOMNode(this.chatBottom).offsetHeight);
+        this.props.upadateField('chatHeaderHeight', findDOMNode(this.chatHeader).offsetHeight);
+        this.props.upadateField('chatBottomHeight', findDOMNode(this.chatBottom).offsetHeight);
     }
 
     _addMessage = () => {
@@ -53,12 +53,12 @@ class ChatBlock extends React.Component {
 
     _renderLayoutStyles = index => {
         const messages = this.props.chat.messages;
-        const isPersonMessage = ['bot', 'date'].indexOf(messages[index].type) === -1;
+        const isPersonMessage = ['recipient', 'sender'].includes(messages[index].type);
+        if (!isPersonMessage) { return }
         const prevMsgAuthor = messages[index - 1].author_id;
         const currMsgAuthor = messages[index].author_id;
         const nextMsgAuthor = messages[index + 1] ? messages[index + 1].author_id : null;
         
-        if (!isPersonMessage) { return }
 
         if (currMsgAuthor !== prevMsgAuthor && currMsgAuthor !== nextMsgAuthor) {
             return 'alone'
@@ -84,22 +84,17 @@ class ChatBlock extends React.Component {
                 <ChatHeader user={chat.user} ref={elem => this.chatHeader = elem} />
                 <div className={styles.inner} ref={elem => this.messageList = elem} style={{ height: height }}>
                     {chat.messages.map((message, index) => {
-                        if (message.type === 'date') {
-                            return <MessageDate key={index} message={message} />
-                        } else if (message.type === 'bot') {
-                            return <MessageBot key={index} message={message} />
-                        } else {
-                            return <Message 
-                                        key={index}
-                                        message={message}
-                                        layout={this._renderLayoutStyles(index)}
-                                        user={chat.user}
-                                        isHidingTime={['sending', 'failed'].indexOf(chat.messages[index].status) === -1}
-                                        isShowingStatusBar={message.type === 'sender' && message.status !== 'archived'}
-                                        resendMessage={() => this._resendMessage(index)}
-                                        deleteMessage={() => this._deleteMessage(index)}
-                                    />
-                        }
+                        return <Message
+                                    type={message.type}
+                                    key={index}
+                                    message={message}
+                                    layout={this._renderLayoutStyles(index)}
+                                    user={chat.user}
+                                    isHidingTime={['sending', 'failed'].includes(chat.messages[index].status)}
+                                    isShowingStatusBar={message.type === 'sender' && message.status !== 'archived'}
+                                    resendMessage={() => this._resendMessage(index)}
+                                    deleteMessage={() => this._deleteMessage(index)}
+                                />
                     })}
                 </div>
                 <div className={styles.bottom} ref={elem => this.chatBottom = elem}>
@@ -123,8 +118,7 @@ class ChatBlock extends React.Component {
 }
 
 export default connect(
-    state => ({
-    }),
+    null,
     dispatch => ({
         onChange: item => dispatch(change(item)),
         addMessage: message => dispatch(addMessage(message)),

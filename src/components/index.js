@@ -7,6 +7,7 @@ import ChatList from 'components/ChatList/ChatList';
 import Header from 'components/Header/Header';
 import HeaderNavBar from 'components/HeaderNavBar/HeaderNavBar';
 import Message from 'components/Message/Message';
+import MessageUser from 'components/MessageUser/MessageUser';
 import MessageBot from 'components/MessageBot/MessageBot';
 import MessageDate from 'components/MessageDate/MessageDate';
 import MessageStatusBar from 'components/MessageStatusBar/MessageStatusBar';
@@ -25,6 +26,7 @@ export {
     Header,
     HeaderNavBar,
     Message,
+    MessageUser,
     MessageBot,
     MessageDate,
     MessageStatusBar,

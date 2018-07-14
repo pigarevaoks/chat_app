@@ -6,7 +6,7 @@ import styles from './MessageDate.css';
 const MessageDate = ({ message }) => (
     <div className={styles.date}>
         <span className={styles.date_title}>
-            {moment(message.date).locale("ru", localization).format('D MMMM')}
+            {moment(message.date, 'MM DD MMMM').locale("ru", localization).format('D MMMM')}
         </span>
     </div>
 );
