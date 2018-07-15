@@ -7,6 +7,7 @@ class ChatHeader extends React.Component {
     
     render() {
         const { user } = this.props;
+        
         return (
             <div className={styles.container}>
                 <div className={styles.title}>

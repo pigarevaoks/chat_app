@@ -20,7 +20,6 @@ export const resendMessage = index => ({
     payload: { index }
 });
 
-
 export const upadateField = (field, value) => ({
     type: allActions.UPDATE_FIELD,
     payload: { field, value }
